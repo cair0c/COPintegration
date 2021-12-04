@@ -1,6 +1,13 @@
+"""Integration Project. Multiple functions including hangman, math, and misc. functions"""
+__author__ = "Cairo"
+
 import random
 
+
 def main():
+    """This is the main encompassing function which includes  all of the functionality of the program. Beginning with
+    the hangman game, followed by the math section, and lastly the misc. functions."""
+
     game_started = False
     stop_game = False
     math_started = False
@@ -11,15 +18,14 @@ def main():
 
     command = input(">").lower()
 
-
     while not stop_game:
 
         if command == "help":
             print('hangman - to start the Hangman\nmath - to start the math game\nstop - to stop the game\nhelp - to'
-                    ' show instructions\nquit - to exit')
+                  ' show instructions\nquit - to exit')
             command = input(">").lower()
 
-    # Hangman portion
+        # Hangman portion
 
         elif command == "hangman":
             if game_started:
@@ -30,19 +36,19 @@ def main():
                 computer_guess = random.choice(dictionary)
                 guess_limit = len(computer_guess) * 2
 
-
             while game_started:
                 guesses = 0
                 points = 0
 
                 # when the length of command is 1 letter, the amount of guesses left is less than or equal to the limit,
-                # and points are unequal to the length of the computer guess, guesses is increased by 1. current points are
-                # then calculated using the check word function with the command and previous points
+                # and points are unequal to the length of the computer guess, guesses is increased by 1. current points
+                # are then calculated using the check word function with the command and previous points
 
                 command = input(
-                    f'Guess a letter of a {len(computer_guess)} letter word.\nYou have {guess_limit} guesses.\n>').lower()
+                    f'Guess a letter of a {len(computer_guess)} letter word.\nYou have {guess_limit} guesses.\n>'
+                ).lower()
 
-                while points <= len(computer_guess):
+                while points < len(computer_guess):
                     if len(command) == 1 and guesses != guess_limit:
                         guesses += 1
                         points = check_word(command, points, computer_guess)
@@ -61,7 +67,6 @@ def main():
                     game_started = False
                     command = input(">").lower()
 
-
                 if command == 'stop':
                     if game_started:
                         print("Game stopped.")
@@ -74,7 +79,7 @@ def main():
                     print('WHAT???')
                     command = input(">").lower()
 
-    # Math portion
+        # Math portion
 
         elif command == 'math':
             print('Welcome to' + ' Math' * 10)
@@ -90,55 +95,85 @@ def main():
                     num1 = random.choice(numbers)
                     num2 = random.choice(numbers)
                     answer = num1 ** num2
-                    command = input(f'What does {num1} to the power of {num2} equal? > ')
 
-                    if int(command) == answer:
+                    while True:
+                        try:
+                            command = int(input(f'What does {num1} to the power of {num2} equal? > '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
+
+                    if command == answer:
                         print('You are correct!')
-                    elif int(command) != answer:
+                    elif command != answer:
                         print(f'Your answer is incorrect.\nThe answer is {answer}')
 
                 elif command == '2':
                     num1 = random.choice(numbers)
                     num2 = random.choice(numbers)
                     answer = num1 / num2
-                    command = input(f'What does {num1} divided by {num2} equal? > ')
 
-                    if float(command) == answer:
+                    while True:
+                        try:
+                            command = float(input(f'What does {num1} divided by {num2} equal? > '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
+
+                    if command == answer:
                         print('You are correct!')
-                    elif float(command) != answer:
+                    elif command != answer:
                         print(f'Your answer is incorrect.\nThe answer is {answer}')
 
                 elif command == '3':
                     num1 = random.choice(numbers)
                     num2 = random.choice(numbers)
                     answer = num1 % num2
-                    command = input(f'What is the remainder of {num1} divided by {num2}? > ')
 
-                    if int(command) == answer:
+                    while True:
+                        try:
+                            command = int(input(f'What is the remainder of {num1} divided by {num2}? > '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
+
+                    if command == answer:
                         print('You are correct!')
-                    elif int(command) != answer:
+                    elif command != answer:
                         print(f'Your answer is incorrect.\nThe answer is {answer}')
 
                 elif command == '4':
                     num1 = random.choice(numbers)
                     num2 = random.choice(numbers)
                     answer = num1 // num2
-                    command = int(input(f'How many full times does {num2} go into {num1}? > '))
 
-                    if int(command) == answer:
+                    while True:
+                        try:
+                            command = int(input(f'How many full times does {num2} go into {num1}? > '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
+
+                    if command == answer:
                         print('You are correct!')
-                    elif int(command) != answer:
+                    elif command != answer:
                         print(f'Your answer is incorrect.\nThe answer is {answer}')
 
                 elif command == '5':
                     num1 = random.choice(numbers)
                     num2 = random.choice(numbers)
                     answer = num1 - num2
-                    command = int(input(f'What is {num1} minus {num2}? > '))
 
-                    if int(command) == answer:
+                    while True:
+                        try:
+                            command = int(input(f'What is {num1} minus {num2}? > '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
+
+                    if command == answer:
                         print('You are correct!')
-                    elif int(command) != answer:
+                    elif command != answer:
                         print(f'Your answer is incorrect.\nThe answer is {answer}')
 
                 elif command == "help":
@@ -150,10 +185,10 @@ def main():
                     command = input(">").lower()
 
                 else:
-                    print('WHAT?????')
+                    print('WHAT??? Input should be a number from the list.')
                     command = input(">").lower()
 
-    # Misc portion
+        # Misc portion
 
         elif command == "misc":
             print('Welcome to Misc. functions')
@@ -167,25 +202,28 @@ def main():
                 command = input(">").lower()
 
                 if command == '1':
+                    while True:
+                        try:
+                            start_num = int(input('Enter a starting number: '))
+                            ending_num = int(input('Enter a ending number: '))
+                            multiple = int(input('Enter a multiple: '))
+                            break
+                        except ValueError:
+                            print('Input should be a number.')
 
-                    startNum = int(input('Enter a starting number: '))
-                    endingNum = int(input('Enter a ending number: '))
-                    multiple = int(input('Enter a multiple: '))
-
-                    if endingNum % multiple == 0:
-                        for number in range(startNum, endingNum + 1, multiple):
+                    if ending_num % multiple == 0:
+                        for number in range(start_num, ending_num + 1, multiple):
                             print(number)
 
-                    elif endingNum % multiple != 0:
-                        print(f'{multiple} isnt a multiple of {endingNum}')
+                    elif ending_num % multiple != 0:
+                        print(f"{multiple} isn't a multiple of {ending_num}")
 
                     else:
-                        print('What bruh??')
+                        print('WHAT???')
                         command = input(">").lower()
 
                 else:
                     print('WHAT?????')
-
 
         elif command == "stop":
             if game_started:
@@ -195,35 +233,38 @@ def main():
                 print('The game is already stopped.')
             command = input(">").lower()
 
-        elif command == "quit" or "leave":
+        elif command == "quit":
             print("Ok. Shutting down.")
             stop_game = True
             break
 
         else:
-            print('WHAT???')
+            print('WHAT??? Input should be a choice from the list.')
             command = input(">").lower()
 
 
 # function to check the users guess against each letter in the word chosen by the computer.
-# If it matches, you gain a point. If it doesnt, you dont.
+# If it matches, you gain a point. If it doesnt, you don't.
 
 
 def check_word(user_guess, points, computer_guess):
+    """The purpose of this function is to take in the letter guessed by the user, the amount of accumulated points, and
+    the computer guess, then iterate through the computer guess to determine if the letter guessed by the user is in the
+    word chosen by the computer. If the letter is a match, then a point is added, if not then it is skipped. Once it is
+    done, it returns the new number of points"""
+
     letter = 0
     while letter != len(computer_guess):
         for x in computer_guess:
-            letter = letter + 1
+            letter += 1
             if x == user_guess:
-                points = points + 1
+                points += 1
                 print(f'you guessed letter {letter} correct!')
             elif x != user_guess:
                 print(f'you guessed letter {letter} wrong')
             else:
                 continue
     return points
-
-
 
 
 print('''
@@ -240,8 +281,7 @@ print(''' ______     ______     __     ______     ______
  \ \_____\  \ \_\ \_\  \ \_\  \ \_\ \_\  \ \_____\ 
   \/_____/   \/_/\/_/   \/_/   \/_/ /_/   \/_____/''')
 print('\nInstructions', 'hangman - to start the Hangman', 'math - to start the math game',
-      'misc - to start misc, functions', 'stop - to stop the game', 'help - to show instructions',
+      'misc - to start misc functions', 'stop - to stop the game', 'help - to show instructions',
       'quit - to exit', sep='\n')
-
 
 main()
